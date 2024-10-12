@@ -1,11 +1,15 @@
 import Link from "next/link";
+import x from "@/styles/app.module.css";
+import y from "@/styles/namdeptrai.module.css";
 
 export default function Home() {
   return (
     <div>
       <ul>
-        <li>
-          <Link href={"/facebook"}>1</Link>
+        <li className={x.red}>
+          <Link href={"/facebook"}>
+            <span className={y.red}>Facebook</span>
+          </Link>
         </li>
       </ul>
     </div>
