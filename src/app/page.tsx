@@ -11,17 +11,17 @@ export default function Home() {
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false, 
+      revalidateOnReconnect: false,
       // params using SWR. When catching data first, if the data does not change, when returning to the previous page, there will be no fetch api.
-    },
+    }
   );
-  if(!data) {
-    return <div>Loading...</div>
+  if (!data) {
+    return <div>Loading...</div>;
   }
   return (
     <div>
       <div>{data?.length}</div>
-      <TableComponent blogs={data}/>
+      <TableComponent blogs={data?.sort((a: any, b: any) => b.id - a.id)} />
     </div>
   );
 }
