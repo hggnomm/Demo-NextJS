@@ -31,10 +31,33 @@ function ModalComponent(props: IProps) {
     });
   };
   const handleSubmit = () => {
-    toast.warning("Create Success!")
-    console.log("Form data:", formInput);
-    setShowModal(false);
+    const { title, author, content } = formInput; // Lấy các giá trị từ formInput
+    if (!title) {
+      toast.error("Not empty title!");
+      return;
+    }
+    fetch("http://localhost:8000/blogs", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, author, content }),
+    }).then((res) => {
+      if (res) {
+        toast.success("Create new blog Success!");
+        setShowModal(false);
+      }
+    });
   };
+  const handleCloseModal = () => {
+    setFormInput({
+        title: "",
+        author: "",
+        content: ""
+    })
+    setShowModal(false)
+  }
   return (
     <>
       <Modal
@@ -82,12 +105,12 @@ function ModalComponent(props: IProps) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
             Save
-          </Button>{" "}
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
