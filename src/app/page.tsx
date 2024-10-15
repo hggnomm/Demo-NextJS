@@ -1,10 +1,13 @@
-"use client";
-import useSWR from "swr";
-import TableComponent from "@/components/table/table";
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Nam đẹp trai',
+  description: 'Description bla bla',
+}
 
 export default function Home() {
   return (
     <div>
     </div>
-  );
+  )
 }

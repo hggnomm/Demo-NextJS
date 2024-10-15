@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import TableComponent from "@/components/table/table";
 import useSWR from "swr";
 
 const Blogs = () => {
-  const router = useRouter();
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const { data, error, isLoading } = useSWR(
