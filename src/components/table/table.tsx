@@ -29,7 +29,7 @@ const TableComponent = (props: IProps) => {
           </tr>
         </thead>
         <tbody>
-          {blogs.map((blog) => {
+          {blogs?.map((blog) => {
             return (
               <tr>
                 <td>{blog.id}</td>
