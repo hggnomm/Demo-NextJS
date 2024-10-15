@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import ModalComponent from "../modal/modalComponent";
+import Link from "next/link";
 interface IProps {
   blogs: IBlog[];
 }
@@ -17,7 +18,9 @@ const TableComponent = (props: IProps) => {
         style={{ display: "flex", justifyContent: "space-between" }}
       >
         <h3>Table Blogs</h3>
-        <Button onClick={() => setShowModal(true)} variant="secondary">Add New</Button>
+        <Button onClick={() => setShowModal(true)} variant="secondary">
+          Add New
+        </Button>
       </div>
       <Table striped bordered hover>
         <thead>
@@ -29,14 +32,16 @@ const TableComponent = (props: IProps) => {
           </tr>
         </thead>
         <tbody>
-          {blogs.map((blog) => {
+          {blogs?.map((blog) => {
             return (
               <tr>
                 <td>{blog.id}</td>
                 <td>{blog.title}</td>
                 <td>{blog.author}</td>
                 <td>
-                  <Button>View</Button>
+                  <Link className="btn btn-primary" href={`/blogs/${blog.id}`}>
+                    View
+                  </Link>
                   <Button variant="warning" className="mx-3">
                     Edit
                   </Button>

@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { mutate } from "swr";
 
 interface IProps {
   showModal: boolean;
@@ -31,7 +32,7 @@ function ModalComponent(props: IProps) {
     });
   };
   const handleSubmit = () => {
-    const { title, author, content } = formInput; // Lấy các giá trị từ formInput
+    const { title, author, content } = formInput;
     if (!title) {
       toast.error("Not empty title!");
       return;
@@ -44,20 +45,23 @@ function ModalComponent(props: IProps) {
       },
       body: JSON.stringify({ title, author, content }),
     }).then((res) => {
-      if (res) {
+      if (res.ok) {
         toast.success("Create new blog Success!");
         setShowModal(false);
+        mutate("http://localhost:8000/blogs");
+      } else {
+        toast.error("Failed to create new blog!");
       }
     });
   };
   const handleCloseModal = () => {
     setFormInput({
-        title: "",
-        author: "",
-        content: ""
-    })
-    setShowModal(false)
-  }
+      title: "",
+      author: "",
+      content: "",
+    });
+    setShowModal(false);
+  };
   return (
     <>
       <Modal
