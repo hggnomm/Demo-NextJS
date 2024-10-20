@@ -12,3 +12,4 @@ npm install swr
 ## KEYWORD!!!
 ### Auto Revalidation 
 If the resource is immutable, that will never change if we revalidate again, we can disable all kinds of automatic revalidations for it.
+
